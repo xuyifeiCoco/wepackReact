@@ -2,12 +2,9 @@
  * 声明整个页面的内容
  */
 import React from 'react'
-import { hot } from 'react-hot-loader'
+import { hot } from 'react-hot-loader'  // eslint-disable-line
 
-class App extends React.Component {
-  render() {
-    return (<div>fsadfgsad</div>)
-  }
-}
+const App = () => <div>fsadffsdagdfgsad</div>
+
 
 export default hot(module)(App)
