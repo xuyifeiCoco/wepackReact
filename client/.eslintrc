@@ -17,6 +17,12 @@
     "react/require-default-props": [0],
     "arrow-body-style": [0],
     "no-param-reassign": [0],
-    "import/no-unresolved":[0]
+    "import/no-unresolved":[0],
+    "import/extensions":[0],
+    " react/jsx-indent":[0],
+    "no-unused-expressions":[0],
+    "no-sequences":[0],
+    "react/jsx-indent":[0],
+    "comma-dangle":[0]             
   }
 }

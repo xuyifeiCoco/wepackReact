@@ -4,6 +4,9 @@ module.exports = {
     path: path.join(__dirname, '../dist'),
     publicPath: '/public/' // 指定生成的文件的引用的静态资源的前缀
   },
+  resolve: {
+    extensions: ['.js', '.jsx'] // 不需要写后缀名的module
+  },
   module: {
     rules: [
       {

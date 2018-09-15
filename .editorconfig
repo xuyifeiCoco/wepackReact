@@ -8,4 +8,4 @@ indent_style = space
 indent_size = 2
 end_of_line = lf  #Unix-style样式的换行符，每个文件都有换行符
 insert_final_newline = true
-trim_trailing_whitespace = true  #去除每行的最后的空格
+

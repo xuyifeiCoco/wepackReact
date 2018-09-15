@@ -1,11 +1,17 @@
 import React from 'react'
 import ReactDom from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 // 包括需要渲染的内容
 // import {AppContainer} from 'react-hot-loader'
-import App from './App.jsx'
+import App from './views/App.jsx'
 // ReactDom.hydrate
 const root = document.getElementById('root')
-ReactDom.render(<App />, root)
+ReactDom.render(
+  <BrowserRouter key="broswer">
+    <App key="app" />
+  </BrowserRouter>,
+  root,
+)
 
 
 // const render= (Component) => {
