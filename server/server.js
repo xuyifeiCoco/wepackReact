@@ -2,13 +2,13 @@ const express = require('express')
 const fs = require('fs')
 const path = require('path')
 const ReactSSR = require('react-dom/server')
-const favicon = require('serve-favicon')
+const favicon = require('serve-favicon') // 解决favicon的问题
 const isDev = process.env.NODE_ENV === 'development'
 
 const app = express()
 app.use(favicon(path.join(__dirname, '../favicon.ico')))
 
-if (!isDev) {
+if (!isDev) { // 正式环境
   const serverEntry = require('../dist/server-entry').default
   const template = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf8')
   app.use('/public', express.static(path.join(__dirname, '../dist')))
@@ -17,7 +17,7 @@ if (!isDev) {
     template.replace('<!-- app -->', appString)
     res.send(template)
   })
-} else {
+} else { // 开发环境
   const devStatic = require('./util/dev-static')
   devStatic(app)
 }

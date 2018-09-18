@@ -8,7 +8,7 @@ export class AppState {
   @observable name ='徐毅飞'
 
   @computed get msg() {
-    return `${this.name} say count is ${this.count}`
+    return `${this.name} say count is 好的${this.count}`
   }
 
   @action add() {
@@ -18,7 +18,7 @@ export class AppState {
 
 const appState = new AppState()
 autorun(() => {
-  console.log(appState.msg)
+  // console.log(appState.msg)
 })
 setInterval(() => {
   appState.add()

@@ -23,6 +23,13 @@
     "no-unused-expressions":[0],
     "no-sequences":[0],
     "react/jsx-indent":[0],
-    "comma-dangle":[0]             
+    "comma-dangle":[0],
+    "no-undef":[0],           
+    "react/destructuring-assignment":[0],                  
+    "react/prop-types":[0],           
+    "react/no-typos":[0],
+    "comma-spacing":[0],
+    "no-console":[0],
+    "import/no-named-as-default":[0]
   }
 }

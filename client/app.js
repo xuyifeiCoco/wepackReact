@@ -1,15 +1,18 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-// 包括需要渲染的内容
-// import {AppContainer} from 'react-hot-loader'
+import { Provider } from 'mobx-react'
 import App from './views/App.jsx'
+import appState from './store/app-state'
 // ReactDom.hydrate
 const root = document.getElementById('root')
 ReactDom.render(
   <BrowserRouter key="broswer">
-    <App key="app" />
+    <Provider appState={appState}>
+      <App key="app" />
+    </Provider>
   </BrowserRouter>,
+
   root,
 )
 
