@@ -4,14 +4,15 @@ const path = require('path')
 // const fs = require('fs')
 const webpack = require('webpack')
 const MemoryFs = require('memory-fs') // 这个可以将内容写入到内存而不是硬盘中
-const proxy = require('http-proxy-middleware')  // 后端的代理
+const proxy = require('http-proxy-middleware') // 后端的代理
 const ReactDomServer = require('react-dom/server')
 const serverConfig = require('../../build/webpack.config.server')
+
 const getTemplate = () => { // 这个方法是用来获取首页的模板
   return new Promise((resolve, reject) => {
     axios.get('http://localhost:8888/public/index.html').then((res) => {
       resolve(res.data)
-    }).catch(() => { reject() })
+    }).catch((err) => { reject(err) })
   })
 }
 

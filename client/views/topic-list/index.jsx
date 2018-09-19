@@ -9,19 +9,21 @@ import AppState from '../../store/app-state'
 @inject('appState')
 @observer
 class TopicList extends React.Component {
-  componentDidMount() {
-    // do something
-    setInterval(() => {
-      // console.log(this.props.appState)
-    },2000)
-    return true
+  constructor() {
+    super()
+    this.changeName = this.changeName.bind(this)
+  }
+
+  changeName(event) {
+    this.props.appState.name = event.target.value
   }
 
   render() {
     return (
         <div>
-        这是一个列表
+       <input type="text" onChange={this.changeName} />
         {this.props.appState.msg}
+        测试热更新 可以的
         </div>
     )
   }
