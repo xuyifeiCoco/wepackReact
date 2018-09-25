@@ -1,3 +1,7 @@
 {
-  "extends": "standard"
+  "extends": "standard",
+  "rules":{
+    "one-var":[0],
+    "spaced-comment":[0]
+  }
 }

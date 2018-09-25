@@ -10,7 +10,7 @@
     "build": "npm run clear && npm run build:client && npm run build:server",
     "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
     "dev:server": "nodemon server/server.js",
-    "start": "node server/server.js"
+    "start": "cross-env NODE_ENV=production node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -27,8 +27,12 @@
   },
   "homepage": "https://github.com/xuyifeiCoco/wepackReact#readme",
   "dependencies": {
+    "@material-ui/core": "^3.1.0",
+    "@material-ui/icons": "^3.0.1",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "ejs-compiled-loader": "^1.1.0",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "mobx": "^5.1.1",
@@ -37,9 +41,13 @@
     "prop-types": "^15.6.2",
     "query-string": "^6.1.0",
     "react": "^16.5.0",
+    "react-async-bootstrapper": "^2.1.1",
     "react-dom": "^16.5.0",
+    "react-helmet": "^5.2.0",
+    "react-jss": "^8.6.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "serialize-javascript": "^1.5.0",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {

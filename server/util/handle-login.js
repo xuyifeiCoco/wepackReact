@@ -1,11 +1,15 @@
 const router = require('express').Router()
 const axios = require('axios') // 发送请求
 
-const baseUrl = 'http://cnodejs.org/api/v1'
+const baseUrl = 'https://cnodejs.org/api/v1'
 
 router.post('/login', function (req, res, next) {
   axios.post(`${baseUrl}/accesstoken`, {
     accesstoken: req.body.accessToken // 判断是否存在session
+  }, {
+    headers: { // 这个是处理form-data的请求
+      // 'Content-Type': 'application/x-www-form-urlencoded'
+    }
   })
     .then(resp => {
       if (resp.status === 200 && resp.data.success) {

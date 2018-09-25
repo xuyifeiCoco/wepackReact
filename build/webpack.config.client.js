@@ -15,6 +15,10 @@ let config = webpackMerge(baseConfig, { // 会对比每一项配置
   plugins: [
     new HTMLPlugin({
       template: path.join(__dirname, '../client/template.html')
+    }),
+    new HTMLPlugin({ // 还要有ejs
+      template: '!!ejs-compiled-loader!' + path.join(__dirname, '../client/server.template.ejs'),
+      filename: 'server.ejs'
     })
   ]
 })
@@ -38,6 +42,9 @@ if (isDev) {
     publicPath: '/public', // 所有访问的资源都会添加一个public
     historyApiFallback: {
       index: '/public/index.html'
+    },
+    proxy: {
+      '/api': 'http://localhost:3333'
     }
   }
   config.plugins.push(new webpack.HotModuleReplacementPlugin())

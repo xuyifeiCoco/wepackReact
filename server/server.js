@@ -3,8 +3,11 @@ const fs = require('fs')
 const path = require('path')
 const bodyParser = require('body-parser') // 处理post过来的参数
 const session = require('express-session') // 保存session
-const ReactSSR = require('react-dom/server')
+
 const favicon = require('serve-favicon') // 解决favicon的问题
+
+const serverRender = require('./util/server-render')
+
 const isDev = process.env.NODE_ENV === 'development'
 
 const app = express()
@@ -28,22 +31,24 @@ app.use(bodyParser.urlencoded({ extended: false })) // 处理form表单的一些
 // 拦截cnode的api请求
 
 app.use('/api/user', require('./util/handle-login'))
+
 app.use('/api', require('./util/proxy'))
 
 if (!isDev) { // 正式环境
-  const serverEntry = require('../dist/server-entry').default
-  const template = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf8')
+  const serverEntry = require('../dist/server-entry')
+  const template = fs.readFileSync(path.join(__dirname, '../dist/server.ejs'), 'utf8')
   app.use('/public', express.static(path.join(__dirname, '../dist')))
-  app.get('*', (req, res) => {
-    const appString = ReactSSR.renderToString(serverEntry)
-    template.replace('<!-- app -->', appString)
-    res.send(template)
+  app.get('*', (req, res, next) => {
+    serverRender(serverEntry, template, req, res).catch(next)
   })
 } else { // 开发环境
   const devStatic = require('./util/dev-static')
   devStatic(app)
 }
-
+app.use(function (error, req, res, next) {
+  console.log(error)
+  res.status(500).send(error)
+})
 app.listen(3333, () => {
   console.log('server is listen 3333')
 })

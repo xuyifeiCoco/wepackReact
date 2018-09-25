@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <%%- title %>
+
+  <%%- meta %>
+  <%%- link %>
+</head>
+<body>
+  <div id="root">
+      <%%- appString%>
+  </div>
+  <!-- 两个百分号保证编译出来还是一个ejs模板 -->
+
+  <script>
+    window.__INITIAL__STATE__= <%%- initialState%>
+  </script>
+</body>
+</html>
