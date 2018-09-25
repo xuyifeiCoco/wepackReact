@@ -8,7 +8,10 @@ import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
 import AppState from '../../store/app-state'
 
-
+function log() {
+  console.log('打印日志')
+}
+@log
 @inject('appState')
 @observer
 class TopicList extends React.Component {

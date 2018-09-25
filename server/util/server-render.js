@@ -5,14 +5,9 @@ const asyncBootstrap = require('react-async-bootstrapper')
 const ReactDomServer = require('react-dom/server')
 
 /*  服务端配置material*/
-
 const SheetsRegistry = require('react-jss/lib/jss').SheetsRegistry
 const createMuiTheme = require('@material-ui/core/styles').createMuiTheme
 const createGenerateClassName = require('@material-ui/core/styles').createGenerateClassName
-// const create = require('jss').create
-// const preset = require('jss-preset-default').default
-// const createMuiTheme = require('material-ui/styles').createMuiTheme
-// const createGenerateClassName = require('material-ui/styles/createGenerateClassName').default
 const colors = require('@material-ui/core/colors')
 
 const getStoreState = (stores) => {
