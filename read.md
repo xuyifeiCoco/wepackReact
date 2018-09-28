@@ -7,3 +7,8 @@ http-proxy-middleware  express的一个中间件
 
 
 122ec43d-8485-4166-a254-c12a8d143435  access_token
+
+
+#注意事项
+1、在组件中定义类的话可以不使用constructor绑定this，但是函数要使用箭头函数来定义   同时state也可以直接初始化
+

@@ -23,7 +23,7 @@ let config = webpackMerge(baseConfig, { // 会对比每一项配置
   ]
 })
 if (isDev) {
-  // http://localhost:8888/app.c105596e.js
+  config.devtool = '#cheap-module-eval-source-map'  // 这个是没有编译完成的
   config.entry = {
     app: [
       'react-hot-loader/patch', // 热跟新代码需要加载
@@ -33,7 +33,7 @@ if (isDev) {
   config.devServer = {
     host: '0.0.0.0',
     port: '8888',
-    contentBase: path.join(__dirname, '../dist'), // 在dist目录下面直接起的服务，一定要将硬盘上的dist目录删除要不然会直接读取dist目录下面的文件，这样就对应不上版本
+    //contentBase: path.join(__dirname, '../dist'), // 在dist目录下面直接起的服务，一定要将硬盘上的dist目录删除要不然会直接读取dist目录下面的文件，这样就对应不上版本
     hot: true, // 需要配置  Hot Module Replacement
     overlay: {
       warnings: false,
