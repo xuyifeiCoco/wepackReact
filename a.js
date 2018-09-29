@@ -25,4 +25,8 @@ const aaa = arrString.split('').reduce(function (res, cur) {
   return res
 }, {})
 console.log(aaa)
+module.exports = () => {
+  console.log('这是一个module')
+}
+
 /*====================================reduce的使用================================*/

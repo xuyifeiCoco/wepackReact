@@ -44,14 +44,14 @@ module.exports = (bundle, template, req, res) => {
     const app = createApp(stores, routerContext, sheetsRegistry, generateClassName, theme, sheetsManager, req.url)
 
     asyncBootstrap(app).then(() => {
-      if (routerContext.url) {
+      const helmet = Helmet.rewind()
+      const state = getStoreState(stores)
+      const content = ReactDomServer.renderToString(app)
+      if (routerContext.url) {  // 如果client上的路由有Redirect属性的话，routerContext会添加url属性
         res.status(302).setHeader('Location', routerContext.url)
         res.end()
         return
       }
-      const helmet = Helmet.rewind()
-      const state = getStoreState(stores)
-      const content = ReactDomServer.renderToString(app)
 
       const html = ejs.render(template, {
         appString: content,

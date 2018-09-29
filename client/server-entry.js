@@ -11,6 +11,8 @@ import { createStoreMap } from './store/store'
 // 使用静态渲染，让mobx在服务端渲染的时候不会重复数据变换
 // context 路由信息
 useStaticRendering(true)
+
+// routerContext 这个是传入StaticRoute会被做一些操作，添加url属性  location 当前请求的url
 export default (stores,routerContext,sheetsRegistry,generateClassName, theme,sheetsManager,url) => (
    <Provider {...stores}>
       <StaticRouter context={routerContext} location={url}>

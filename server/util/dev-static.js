@@ -10,6 +10,7 @@ const proxy = require('http-proxy-middleware') // 后端的代理
 
 const serverConfig = require('../../build/webpack.config.server')
 const serverRender = require('./server-render')
+
 /*转化一段js字符串，让他成为可执行的，同时支持require方法*/
 const NativeModule = require('module')
 const vm = require('vm')
@@ -38,15 +39,14 @@ let serverBundle = {}
 const mfs = new MemoryFs()
 const serverComplier = webpack(serverConfig)
 serverComplier.outputFileSystem = mfs// 指定输出文件为mfs，在内存中  不在硬盘中
-serverComplier.watch({}, (err, state) => { // state  webpack打包的信息
+serverComplier.watch({}, (err, state) => { // state  webpack打包的信息  监听文件的变化
   if (err) throw err
   state = state.toJson()
   state.errors.forEach(err => console.log(err))
   state.warnings.forEach(warning => console.log(warning))
 
   const bundlePath = path.join(serverConfig.output.path, serverConfig.output.filename)
-  const bundle = mfs.readFileSync(bundlePath, 'utf-8') // 这个读取出来是一个js的字符串
-
+  const bundle = mfs.readFileSync(bundlePath, 'utf-8') // 这个读取出来是一个js的字符串,是通过webpack打包生成的
   const m = getModuleFromString(bundle, 'server-entry.js')
   serverBundle = m.exports
 })

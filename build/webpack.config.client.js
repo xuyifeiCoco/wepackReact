@@ -22,11 +22,16 @@ let config = webpackMerge(baseConfig, { // 会对比每一项配置
     })
   ]
 })
+
+// const env = process.env
+// env.MEIPIAN_PROJECT_PACKAGE_CONFIG = path.join(process.cwd(), 'package.json') // 可以获取当前进程的路径
+// console.log(require(env.MEIPIAN_PROJECT_PACKAGE_CONFIG))  
+
 if (isDev) {
-  config.devtool = '#cheap-module-eval-source-map'  // 这个是没有编译完成的
+  config.devtool = '#cheap-module-eval-source-map'  // 这个是没有编译完成的原始代码 方便调试
   config.entry = {
     app: [
-      'react-hot-loader/patch', // 热跟新代码需要加载
+      'react-hot-loader/patch', // 热更新代码需要加载
       path.join(__dirname, '../client/app.js')
     ]
   }

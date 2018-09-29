@@ -7,7 +7,7 @@ import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import {
-  Paper, Tabs, Tab
+  Tabs, Tab
 } from '@material-ui/core'
 import AppState from '../../store/app-state'
 import Container from '../layout/container'

@@ -9,7 +9,7 @@ import React from 'react'
 // } from 'react-router-dom'
 import { hot } from 'react-hot-loader'  // eslint-disable-line
 import Routes from '../config/router.jsx'
-import AppBar from './layout/app-bar'
+// import AppBar from './layout/app-bar'
 
 class App extends React.Component {
   componentDidMount() {
@@ -18,7 +18,7 @@ class App extends React.Component {
 
   render() {
     return [
-      <AppBar key="appbar" />,
+      // <AppBar key="appbar" />,
       <Routes key="routes" />,
     ]
   }
