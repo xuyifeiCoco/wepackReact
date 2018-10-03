@@ -6,7 +6,7 @@ import {
 } from '@material-ui/core/styles';
 import JssProvider from 'react-jss/lib/JssProvider'
 import App from './views/app'
-import { createStoreMap } from './store/store'
+import { createStoreMap } from './store'
 
 // 使用静态渲染，让mobx在服务端渲染的时候不会重复数据变换
 // context 路由信息

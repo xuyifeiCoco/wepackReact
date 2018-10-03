@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const baseConfig = require('./webpack.base')
 // const HTMLPlugin=require('html-webpack-plugin')  //生成html模板
@@ -14,5 +15,10 @@ module.exports = webpackMerge(baseConfig, {
   output: {
     filename: 'server-entry.js',
     libraryTarget: 'commonjs2' // 打包的规范
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({ // 这里面定义的一些变量在全局都是可以访问到的
+      'process.env.API_BASE': '"http://127.0.0.1:3333"'
+    })
+  ]
 })

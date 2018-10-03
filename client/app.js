@@ -7,7 +7,7 @@ import { lightBlue, pink } from '@material-ui/core/colors'
 
 import { Provider } from 'mobx-react'
 import App from './views/App.jsx'
-import AppState from './store/app-state'
+import { AppState, TopicStore } from './store'
 // ReactDom.hydrate
 
 const theme = createMuiTheme({
@@ -20,10 +20,14 @@ const theme = createMuiTheme({
 
 const initialState =window.__INITIAL__STATE__ || {} // eslint-disable-line
 
+const appState = new AppState(initialState.appState)
+// appState.init(initialState.appState)
+const topicStore = new TopicStore(initialState.topicStore)
+
 const root = document.getElementById('root')
 ReactDom.render(
   <BrowserRouter key="broswer">
-    <Provider appState={new AppState(initialState.appState)}>
+    <Provider appState={appState} topicStore={topicStore}>
     <MuiThemeProvider theme={theme}>
       <App key="app" />
     </MuiThemeProvider>
