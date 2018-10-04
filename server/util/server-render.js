@@ -25,6 +25,12 @@ module.exports = (bundle, template, req, res) => {
     const routerContext = {}
     const stores = createStoreMap()
 
+    const user = req.session.user
+    if (user) {
+      stores.appState.user.isLogin = true
+      stores.appState.user.info = user
+    }
+
     // material-ui服务端配置
     const sheetsRegistry = new SheetsRegistry()
     // Create a sheetsManager instance.
@@ -47,21 +53,22 @@ module.exports = (bundle, template, req, res) => {
       const helmet = Helmet.rewind()
       const state = getStoreState(stores)
       const content = ReactDomServer.renderToString(app)
-      if (routerContext.url) {  // 如果client上的路由有Redirect属性的话，routerContext会添加url属性
+      if (routerContext.url) { // 如果client上的路由有Redirect属性的话，routerContext会添加url属性
         res.status(302).setHeader('Location', routerContext.url)
         res.end()
         return
       }
-
+      const css = sheetsRegistry.toString()
       const html = ejs.render(template, {
         appString: content,
         initialState: serialize(state),
         meta: helmet.meta.toString(),
         title: helmet.title.toString(),
-        style: helmet.style.toString(),
+        style: css,
         link: helmet.link.toString()
         // materialCss: sheetsRegistry.toString()
       })
+   
       res.send(html)
       resolve()
     }).catch(reject)

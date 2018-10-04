@@ -33,11 +33,6 @@ class UserLogin extends React.Component {
     this.handleInput = this.handleInput.bind(this)
   }
   
-  componentWillMount() {
-    if (this.props.user.isLogin) {
-      this.context.router.history.replace('/user/info')
-    }
-  }
 
   getFrom(location) {
     location = location || this.props.location

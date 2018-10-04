@@ -26,7 +26,7 @@ export default class AppState {
     topicTab: 0,
   }
 
-  init({ user }) {
+  init({ user } = {}) {
     if (user) {
       this.user = user
     }

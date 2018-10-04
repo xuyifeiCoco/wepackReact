@@ -66,7 +66,7 @@ class TopicDetail extends React.Component {
     return this.props.topicStore.detailsMap[id]
   }
 
-  asyncBootstrap() {
+  bootstrap() {
     console.log('topic detail invoked') // eslint-disable-line
     const { id } = this.props.match.params
     return this.props.topicStore.getTopicDetail(id).then(() => {

@@ -24,7 +24,7 @@ const styles = {
 
 @inject((stores) => {
   return {
-    user: stores.appState.user,
+    appState: stores.appState,
   }
 }) @observer
 class MainAppBar extends React.Component {
@@ -52,7 +52,7 @@ class MainAppBar extends React.Component {
   /* eslint-enable */
 
   loginButtonClick = () => {
-    if (this.props.user.isLogin) {
+    if (this.props.appState.user.isLogin) {
       this.context.router.history.push('/user/info')
     } else {
       this.context.router.history.push({
@@ -65,7 +65,8 @@ class MainAppBar extends React.Component {
 
   render() {
     // console.log(this.props)
-    const { classes ,user } = this.props
+    const { classes , appState } = this.props
+    const { user } = appState
     // console.log(classes)
     return (
       <div className={classes.root}>
@@ -78,7 +79,7 @@ class MainAppBar extends React.Component {
               JNODE
             </Typography>
             <Button color="primary" variant="contained" onClick={this.crateButtonClick}> 新建话题</Button>
-            <Button color="inherit" onClick={this.loginButtonClick}> 
+            <Button color="primary" variant="contained" onClick={this.loginButtonClick}> 
               {user.isLogin ? user.info.loginname : '登录'}
             </Button>
 
@@ -91,7 +92,7 @@ class MainAppBar extends React.Component {
 }
 
 MainAppBar.wrappedComponent.propTypes = {
-  user: PropTypes.object.isRequired,
+  appState: PropTypes.object.isRequired,
 }
 MainAppBar.propTypes = {
   classes: PropTypes.object.isRequired,

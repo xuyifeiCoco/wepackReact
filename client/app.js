@@ -21,7 +21,7 @@ const theme = createMuiTheme({
 const initialState =window.__INITIAL__STATE__ || {} // eslint-disable-line
 
 const appState = new AppState(initialState.appState)
-// appState.init(initialState.appState)
+appState.init(initialState.appState)
 const topicStore = new TopicStore(initialState.topicStore)
 
 const root = document.getElementById('root')

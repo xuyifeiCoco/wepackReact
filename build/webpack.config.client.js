@@ -1,8 +1,10 @@
 const path = require('path')
 const webpack = require('webpack')
 const HTMLPlugin = require('html-webpack-plugin') // 生成html模板
+// const uglifyjsPlugin = require('uglifyjs-webpack-plugin') //压缩代码
 const webpackMerge = require('webpack-merge')
 const baseConfig = require('./webpack.base')
+const cdnConfig = require('../app.config').cdn
 const isDev = process.env.NODE_ENV === 'development' // 再启动时设置
 let config = webpackMerge(baseConfig, { // 会对比每一项配置
   mode: 'development',
@@ -53,5 +55,49 @@ if (isDev) {
     }
   }
   config.plugins.push(new webpack.HotModuleReplacementPlugin())
+} else {
+  config.entry = {
+    app: path.join(__dirname, '../client/app.js'),
+    commons: [ //将这些第三方的资源打包到一个js文件
+      'react',
+      'react-dom',
+      'react-router-dom',
+      'mobx',
+      'mobx-react',
+      'axios',
+      'query-string',
+      'dateformat',
+      'marked'
+    ]
+  }
+  // chunkhash 再有多个entry的时候使用
+  config.output.filename = '[name].[chunkhash].js'
+  config.output.publicPath = cdnConfig.host
+  config.optimization = {
+    // minimizer: [
+    //   new uglifyjsPlugin({
+    //     uglifyOptions: {
+    //       compress: false
+    //     }
+    //   })
+    // ], // 压缩代码
+    splitChunks: {
+      // chunks: 'initial', // 只对入口文件处理
+      // commons里面的name就是生成的共享模块bundle的名字
+      //chunks 有三个可选值，”initial”, “async” 和 “all”. 分别对应优化时只选择初始的chunks，所需要的chunks 还是所有chunks 。
+      cacheGroups: { // 以自己设置一组一组的cache group来配对应的共享模块
+        commons: { // split `node_modules`目录下被打包的代码到 `page/vendor.js && .css` 没找到可打包文件的话，则没有。css需要依赖 `ExtractTextPlugin`
+          name: 'commons',
+          chunks: 'initial',
+          minChunks: 2
+        }
+        // runtimeChunk: {
+        //   name: 'manifest'
+        // }
+      }
+    }
+  }
+  config.plugins.push(
+  )
 }
 module.exports = config

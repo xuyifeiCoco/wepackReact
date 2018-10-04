@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core/styles'
 import {
   Tabs, Tab ,List, CircularProgress
 } from '@material-ui/core'
-import { AppState,TopicStore } from '../../store'
+import { TopicStore } from '../../store'
 import Container from '../layout/container'
 import TopicListItem from './tab-list'
 
@@ -25,7 +25,7 @@ const styles = {
 @inject((stores) => {
   return {
     topicStore: stores.topicStore,
-    appState: stores.appState,
+    // appState: stores.appState,
     // user: stores.appState.user,
   }
 })
@@ -69,11 +69,13 @@ class TopicList extends React.Component {
   }
 
   bootstrap() { // 注意这个函数名字和服务端渲染的时候  名字一定要对应
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        this.props.appState.add()
-        resolve(true)
-      })
+    const query = queryString.parse(this.props.location.search)
+    const { tab } = query
+    return this.props.topicStore.fetchTopics(tab || 'all').then(() => {
+      return true
+    }).catch(() => {
+      // console.log(err)
+      return false
     })
   }
 
@@ -136,7 +138,7 @@ class TopicList extends React.Component {
 
 TopicList.wrappedComponent.propTypes = {
   topicStore: PropTypes.instanceOf(TopicStore).isRequired,
-  appState: PropTypes.instanceOf(AppState).isRequired,
+  // appState: PropTypes.instanceOf(AppState).isRequired,
   // user: PropTypes.object.isRequired,
 }
 

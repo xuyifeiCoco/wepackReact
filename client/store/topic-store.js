@@ -67,7 +67,7 @@ export class TopicStore {
 
   @observable syncing = false
 
-  @observable tab = undefined
+  @observable tab
 
   constructor(
     {
@@ -176,7 +176,6 @@ export class TopicStore {
             reject()
           }
         }).catch((err) => {
-          console.log('fasd')
           reject(err)
         })
       }
@@ -185,9 +184,8 @@ export class TopicStore {
 
   toJson() {
     return {
-      page: this.page,
       topics: toJS(this.topics),
-      syncing: toJS(this.syncing),
+      syncing: this.syncing,
       details: toJS(this.details),
       tab: this.tab,
       createdReplies: toJS(this.createdReplies)
